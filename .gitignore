@@ -26,3 +26,11 @@ npm-debug.log*
 
 # QA locale
 .qa-*.png
+
+# env
+.env
+.env.example
+
+#docs
+docs/*
+docs/

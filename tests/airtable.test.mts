@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import process from "node:process";
 
 process.env.AIRTABLE_TOKEN = "pat_test";
 process.env.AIRTABLE_BASE_ID = "app_test";
@@ -85,7 +86,7 @@ const {
   DemandeLotError,
   createDemande,
   getLots,
-} = await import("../lib/airtable.ts");
+} = await import("../lib/airtable");
 
 const lots = await getLots();
 assert.deepEqual(

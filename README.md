@@ -48,15 +48,15 @@ npm run start       # serveur de production local
 
 ## Variables d'environnement
 
-| Variable | Portée | Rôle |
-| --- | --- | --- |
-| `AIRTABLE_TOKEN` | serveur | Token personnel Airtable (lecture + écriture, une seule base) |
-| `AIRTABLE_BASE_ID` | serveur | ID de la base (`appXXXXXXXXXXXXXX`) |
-| `AIRTABLE_LOTS_TABLE` | serveur | Nom de la table des lots (`Lots` par défaut) |
-| `AIRTABLE_DEMANDES_TABLE` | serveur | Nom de la table des demandes (`Demandes` par défaut) |
-| `NEXT_PUBLIC_SITE_URL` | public | URL publique du site (métadonnées, sitemap) |
-| `NEXT_PUBLIC_CONTACT_EMAIL` | public | Email affiché sur le site |
-| `RATE_LIMIT_SALT` | serveur | Sel optionnel pour le hachage des IP du rate limit |
+| Variable                    | Portée  | Rôle                                                          |
+| --------------------------- | ------- | ------------------------------------------------------------- |
+| `AIRTABLE_TOKEN`            | serveur | Token personnel Airtable (lecture + écriture, une seule base) |
+| `AIRTABLE_BASE_ID`          | serveur | ID de la base (`appXXXXXXXXXXXXXX`)                           |
+| `AIRTABLE_LOTS_TABLE`       | serveur | Nom de la table des lots (`Lots` par défaut)                  |
+| `AIRTABLE_DEMANDES_TABLE`   | serveur | Nom de la table des demandes (`Demandes` par défaut)          |
+| `NEXT_PUBLIC_SITE_URL`      | public  | URL publique du site (métadonnées, sitemap)                   |
+| `NEXT_PUBLIC_CONTACT_EMAIL` | public  | Email affiché sur le site                                     |
+| `RATE_LIMIT_SALT`           | serveur | Sel optionnel pour le hachage des IP du rate limit            |
 
 > Tout ce qui est préfixé `NEXT_PUBLIC_` est visible dans le navigateur. Le
 > token Airtable ne doit **jamais** porter ce préfixe.
@@ -113,21 +113,21 @@ Validation serveur + honeypot + rate limit
 
 ### Fichiers clés
 
-| Fichier | Rôle |
-| --- | --- |
-| `app/page.tsx` | Page programme, liste des lots, filtres |
-| `app/demande/page.tsx` | Page formulaire, résumé du lot sélectionné |
-| `app/api/demandes/route.ts` | API POST : validation, anti-spam, écriture Airtable |
-| `app/confirmation/page.tsx` | Confirmation, sans données personnelles dans l'URL |
-| `app/confidentialite/page.tsx` | Politique de confidentialité |
-| `app/mentions-legales/page.tsx` | Mentions légales |
-| `lib/airtable.ts` | Accès Airtable, cache, mapping, écriture |
-| `lib/validation.ts` | Validation serveur des champs |
-| `lib/site.ts` | Configuration, consentement, informations légales |
-| `lib/lots.ts` | Types, données de démonstration, formatage |
-| `components/DemandeForm.tsx` | Formulaire client, erreurs, honeypot |
-| `app/globals.css` | Design complet, responsive, reduced motion |
-| `tests/airtable.test.mts` | Test mocké : mapping, pagination, payload, erreurs |
+| Fichier                         | Rôle                                                |
+| ------------------------------- | --------------------------------------------------- |
+| `app/page.tsx`                  | Page programme, liste des lots, filtres             |
+| `app/demande/page.tsx`          | Page formulaire, résumé du lot sélectionné          |
+| `app/api/demandes/route.ts`     | API POST : validation, anti-spam, écriture Airtable |
+| `app/confirmation/page.tsx`     | Confirmation, sans données personnelles dans l'URL  |
+| `app/confidentialite/page.tsx`  | Politique de confidentialité                        |
+| `app/mentions-legales/page.tsx` | Mentions légales                                    |
+| `lib/airtable.ts`               | Accès Airtable, cache, mapping, écriture            |
+| `lib/validation.ts`             | Validation serveur des champs                       |
+| `lib/site.ts`                   | Configuration, consentement, informations légales   |
+| `lib/lots.ts`                   | Types, données de démonstration, formatage          |
+| `components/DemandeForm.tsx`    | Formulaire client, erreurs, honeypot                |
+| `app/globals.css`               | Design complet, responsive, reduced motion          |
+| `tests/airtable.test.mts`       | Test mocké : mapping, pagination, payload, erreurs  |
 
 ## Sécurité et RGPD
 
@@ -227,9 +227,3 @@ mocké et build de production.
 
 Les arbitrages, hypothèses, choix RGPD et le temps passé sont dans
 [`DECISIONS.md`](DECISIONS.md).
-#   K A L I M O - P R O M O T I O N  
- #   K A L I M O - P R O M O T I O N  
- #   K A L I M O - P R O M O T I O N  
- #   K A L I M O - P R O M O T I O N  
- #   K A L I M O - P R O M O T I O N  
- 
