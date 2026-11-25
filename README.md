@@ -41,6 +41,7 @@ Commandes utiles :
 
 ```bash
 npm run typecheck   # vérification TypeScript
+npm test            # test de la couche Airtable (API mockée)
 npm run build       # build de production
 npm run start       # serveur de production local
 ```
@@ -66,6 +67,10 @@ Le mode opératoire complet (schéma, import CSV, vue Commercial, automatisation
 email, création du token) est dans [`airtable/README.md`](airtable/README.md).
 Le fichier [`airtable/lots.csv`](airtable/lots.csv) contient les 12 lots de
 démonstration à importer.
+
+> Le plan gratuit Airtable est limité (1 000 enregistrements par base, nombre
+> d'éditeurs et exécutions d'automatisation restreints). Pour un lancement,
+> c'est suffisant ; vérifier la limite avant une campagne de longue durée.
 
 Les noms de champs doivent correspondre exactement à ceux du code :
 
@@ -122,6 +127,7 @@ Validation serveur + honeypot + rate limit
 | `lib/lots.ts` | Types, données de démonstration, formatage |
 | `components/DemandeForm.tsx` | Formulaire client, erreurs, honeypot |
 | `app/globals.css` | Design complet, responsive, reduced motion |
+| `tests/airtable.test.mts` | Test mocké : mapping, pagination, payload, erreurs |
 
 ## Sécurité et RGPD
 
@@ -138,6 +144,12 @@ Validation serveur + honeypot + rate limit
 - En-têtes de sécurité dans `next.config.ts`.
 - Les pages légales contiennent des champs à confirmer par le client
   (forme juridique, adresse, SIREN, directeur de publication, email).
+
+## Intégration continue
+
+Le workflow `.github/workflows/ci.yml` exécute à chaque push sur `main` et à
+chaque pull request : installation, vérification TypeScript, test Airtable
+mocké et build de production.
 
 ## Déploiement
 
@@ -156,11 +168,17 @@ Validation serveur + honeypot + rate limit
    détecté automatiquement (Next.js).
 3. Ajouter les variables d'environnement `AIRTABLE_TOKEN`,
    `AIRTABLE_BASE_ID`, `AIRTABLE_LOTS_TABLE`, `AIRTABLE_DEMANDES_TABLE`,
-   `NEXT_PUBLIC_CONTACT_EMAIL`.
+   `NEXT_PUBLIC_CONTACT_EMAIL` et, si besoin, `RATE_LIMIT_SALT`.
 4. Déployer, puis renseigner `NEXT_PUBLIC_SITE_URL` avec l'URL Vercel finale
-   et redéployer (les métadonnées et le sitemap en dépendent).
+   et redéployer (les métadonnées et le sitemap en dépendent). Redéployer
+   également après tout ajout ou changement de variable d'environnement.
 5. Vérifier que le bandeau « Mode démonstration » a disparu : Airtable est
    bien connecté.
+
+> Le plan Hobby de Vercel est gratuit mais ses conditions le réservent à un
+> usage personnel / non commercial. Pour un site de promotion immobilière,
+> vérifier les conditions ou prévoir un plan Pro. Techniquement, l'app tient
+> largement sur l'offre gratuite.
 
 > Ne pas committer `.env.local`. Le token Airtable ne doit pas apparaître dans
 > l'historique Git. En cas de fuite, le révoquer immédiatement dans Airtable.
@@ -198,7 +216,12 @@ Validation serveur + honeypot + rate limit
   de droits. Des photos professionnelles pourront les remplacer.
 - Les informations légales et l'email de contact sont des espaces à confirmer
   avant la mise en ligne réelle.
-- Pas de tests automatisés : la recette est manuelle (checklist ci-dessus).
+- La purge des prospects à 3 ans n'est pas automatisée : prévoir une
+  automatisation Airtable ou une revue trimestrielle.
+- Pas de tests end-to-end automatisés : la recette est manuelle (checklist
+  ci-dessus). La couche Airtable est couverte par un test mocké (`npm test`).
+- Pas de CSP : Next.js utilise des scripts inline ; une CSP à nonces est à
+  ajouter si l'on veut durcir davantage les en-têtes.
 
 ## Documentation de conception
 

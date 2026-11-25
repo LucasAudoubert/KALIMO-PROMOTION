@@ -45,7 +45,7 @@ export default function RootLayout({
   const demoMode = !isAirtableConfigured();
 
   return (
-    <html lang="fr">
+    <html lang="fr" data-scroll-behavior="smooth">
       <body>
         <a className="skip-link" href="#contenu">
           Aller au contenu

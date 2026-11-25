@@ -28,6 +28,7 @@ Jardins de Vauban :
 - Consentement non pré-coché, versionné et horodaté par Airtable.
 - Mode démonstration automatique si Airtable n'est pas configuré.
 - `README.md`, `DECISIONS.md`, CSV d'import et mode opératoire Airtable.
+- Test mocké de la couche Airtable (`npm test`), sans token ni réseau.
 
 ## 3. Décisions structurantes
 
@@ -131,6 +132,12 @@ message générique et invite à réessayer. Aucun détail Airtable n'est expos�
 - **Airtable et Vercel sont des sous-traitants hors UE.** Les transferts doivent
   être couverts par leurs accords de sous-traitance et les clauses contractuelles
   types / le Data Privacy Framework. À signaler et à documenter avec le client.
+- **Le plan Hobby de Vercel est réservé à un usage non commercial.** Il suffit
+  techniquement, mais un site de promotion immobilière doit vérifier les
+  conditions ou prévoir un plan Pro.
+- **Le plan gratuit Airtable a des limites** (1 000 enregistrements par base,
+  éditeurs et automatisations restreints). Suffisant pour le lancement, à
+  surveiller si le volume de demandes augmente.
 - **L'email de contact et les informations légales sont des hypothèses** :
   `contact@kalimo.fr`, forme juridique, adresse, SIREN et directeur de
   publication sont à confirmer avant mise en ligne. Ils sont centralisés dans
@@ -168,6 +175,11 @@ message générique et invite à réessayer. Aucun détail Airtable n'est expos�
   formulaire. Cette distinction est à expliquer au client.
 - Le hachage d'IP pour le rate limit est éphémère (mémoire, 10 minutes) mais
   reste un traitement de données : il est documenté ici et minimisé.
+- La suppression à 3 ans n'est pas automatisée : elle doit être planifiée dans
+  Airtable (automatisation ou revue trimestrielle). La politique de
+  confidentialité l'annonce, l'outil doit suivre.
+- Aucune CSP n'est configurée pour ne pas casser les scripts inline de Next.js.
+  Une CSP à nonces est la prochaine amélioration de sécurité.
 - Les informations légales doivent être complétées et validées par le client
   avant toute mise en ligne réelle.
 
@@ -183,7 +195,7 @@ message générique et invite à réessayer. Aucun détail Airtable n'est expos�
 | Photos et plans de masse | Données non fournies ; illustrations originales en attendant |
 | Analytics | Pas de besoin, et évite un bandeau cookies |
 | Captcha | Honeypot + rate limit suffisent pour le lancement |
-| Tests end-to-end | Temps contraint ; recette manuelle documentée dans le README |
+| Tests end-to-end | Temps contraint ; recette manuelle documentée. La couche Airtable est couverte par un test mocké (`npm test`) |
 | Multilingue | Programme local, public francophone |
 | Compteur public de demandes | Le bonus est couvert dans Airtable, pas sur le site public |
 
@@ -204,9 +216,10 @@ La démarche :
 4. **Relecture humaine** : chaque fichier a été relu, les dépendances refusées
    quand elles n'étaient pas nécessaires, les noms de champs Airtable vérifiés
    à l'identique, les textes légaux relus.
-5. **Vérification par l'exécution** : `tsc --noEmit`, `next build`, tests HTTP
-   des cas valides et invalides, filtre `?type=T3`, captures desktop et mobile,
-   contrôle des en-têtes et de l'absence de cookie.
+5. **Vérification par l'exécution** : `tsc --noEmit`, `next build`, test mocké
+   de la couche Airtable, tests HTTP des cas valides et invalides, filtre
+   `?type=T3`, parcours navigateur complet, captures desktop et mobile,
+   contrôle des en-têtes, des cookies et du bundle client.
 6. **Ce qui n'a pas été délégué** : les prix, les disponibilités, les
    coordonnées légales et la décision de publier. L'IA propose, le client
    valide.
@@ -249,8 +262,10 @@ Prochaines étapes, par ordre de valeur :
 3. Créer le token Airtable restreint et le mettre dans Vercel.
 4. Configurer la vue « Commercial » et l'automatisation email.
 5. Tester le parcours complet sur mobile et vérifier la réception des emails.
-6. Ajouter des photos professionnelles quand elles seront disponibles.
-7. Si le spam devient un problème : Turnstile, puis journalisation des
+6. Programmer la purge des données à 3 ans (automatisation Airtable ou revue
+   trimestrielle).
+7. Ajouter des photos professionnelles quand elles seront disponibles.
+8. Si le spam devient un problème : Turnstile, puis journalisation des
    tentatives (sans données personnelles).
-8. Si un second programme est lancé : extraire une table `Programmes` et
+9. Si un second programme est lancé : extraire une table `Programmes` et
    paramétrer les pages par programme.

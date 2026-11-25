@@ -168,7 +168,7 @@ export default async function HomePage({
             <p className="eyebrow">Le programme</p>
             <h2>Une maison de ville, à l&apos;écart du bruit.</h2>
             <p>
-              Les Jardins de Vauban rassemble {unavailable ? "une douzaine de" : lots.length} logements
+              Les Jardins de Vauban rassemble {unavailable ? "des" : lots.length} logements
               du T2 au T4. Le projet privilégie des adresses de vie simples :
               de la lumière, des plans lisibles et un rapport direct au jardin.
             </p>
