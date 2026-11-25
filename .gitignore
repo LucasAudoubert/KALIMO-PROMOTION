@@ -38,3 +38,7 @@ docs/
 # OC
 .opencode
 .opencode/*
+
+# vscode
+.vscode
+.vscode/*
