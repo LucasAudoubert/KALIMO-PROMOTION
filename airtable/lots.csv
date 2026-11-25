@@ -1,0 +1,13 @@
+Référence,Type,Surface (m²),Étage,Prix (€),Statut
+A-101,T2,44,0,238000,Disponible
+A-102,T2,46,0,249000,Vendu
+A-103,T3,64,0,318000,Disponible
+A-104,T3,67,0,332000,Optionné
+A-201,T2,45,1,252000,Disponible
+A-202,T3,66,1,329000,Disponible
+A-203,T4,88,1,421000,Disponible
+A-204,T4,91,1,438000,Optionné
+A-301,T3,68,2,341000,Disponible
+A-302,T3,70,2,352000,Vendu
+A-303,T4,93,2,449000,Disponible
+A-401,T4,96,3,468000,Optionné
