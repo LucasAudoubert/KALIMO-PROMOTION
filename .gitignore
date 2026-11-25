@@ -34,3 +34,7 @@ npm-debug.log*
 #docs
 docs/*
 docs/
+
+# OC
+.opencode
+.opencode/*
